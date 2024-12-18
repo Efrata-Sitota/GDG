@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>BMI Calculator</h1>
+<label for="weight">Weight (kg):</label><br>
+<input type="number" id="weight" placeholder="Enter weight in kg" required><br>
+
+<label for="height">Height (m):</label><br>
+<input type="number" id="height" placeholder="Enter height in meters" required><br>
+
+<button onclick="calculateBMI()">Calculate BMI</button>
+
+<div class="result" id="result"></div>
+
+<script>
+    function calculateBMI() {
+        // Get user input
+        const weight = parseFloat(document.getElementById('weight').value);
+        const height = parseFloat(document.getElementById('height').value);
+
+        // Validate input
+        if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+            document.getElementById('result').innerText = 'Please enter valid weight and height.';
+            return;
+        }
+
+        // Calculate BMI
+        const bmi = weight / (height * height);
+
+        // Determine BMI category
+        let category;
+        if (bmi < 18.5) {
+            category = 'Underweight';
+        } else if (bmi >= 18.5 && bmi < 24.9) {
+            category = 'Normal weight';
+        } else if (bmi >= 25 && bmi < 29.9) {
+            category = 'Overweight';
+        } else {
+            category = 'Obesity';
+        }
+
+        // Display result
+        document.getElementById('result').innerText = Your BMI is ${bmi.toFixed(2)} (${category}).;
+    }
+</script>
+
+</body>
+</html>
